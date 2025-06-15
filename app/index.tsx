@@ -1,5 +1,5 @@
-import { useEffect } from "react";
 import { useRouter } from "expo-router";
+import { useEffect } from "react";
 import SplashScreen from "./screens/SplashScreen";
 
 export default function Index() {
@@ -8,7 +8,7 @@ export default function Index() {
   useEffect(() => {
     const timeout = setTimeout(() => {
       router.replace("/screens/OnboardingScreen");
-    }, 100000); // 2-second splash
+    }, 10000); // 2-second splash
 
     return () => clearTimeout(timeout);
   }, []);
