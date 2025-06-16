@@ -208,15 +208,13 @@ export default function SignupScreen() {
                 className="text-green-600 font-medium underline"
                 onPress={() => router.push("/")}
               >
-                {" "}
                 Terms of Service
-              </Text>{" "}
+              </Text>
               and
               <Text
                 className="text-green-600 font-medium underline"
                 onPress={() => router.push("/")}
               >
-                {" "}
                 Privacy Policy
               </Text>
               .

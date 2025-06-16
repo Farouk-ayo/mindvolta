@@ -1,20 +1,20 @@
-import React, { useState } from "react";
-import {
-  View,
-  Text,
-  StatusBar,
-  Pressable,
-  KeyboardAvoidingView,
-  Platform,
-  ScrollView,
-  Alert,
-} from "react-native";
 import { useRouter } from "expo-router";
 import { ChevronLeft } from "lucide-react-native";
+import React, { useState } from "react";
+import {
+  Alert,
+  KeyboardAvoidingView,
+  Platform,
+  Pressable,
+  ScrollView,
+  StatusBar,
+  Text,
+  View,
+} from "react-native";
 
 import AnimatedFadeSlide from "@/components/AnimatedFadeSlide";
-import Input from "@/components/ui/Input";
 import AuthButton from "@/components/ui/AuthButton";
+import Input from "@/components/ui/Input";
 import SocialButton from "@/components/ui/SocialButton";
 
 export default function LoginScreen() {
@@ -91,15 +91,22 @@ export default function LoginScreen() {
           <View className="pt-12 px-6">
             <Pressable
               onPress={() => router.back()}
-              className="w-10 h-10 items-center justify-center mb-6"
+              className="w-10 h-10 gap-2 flex items-center justify-center mb-6"
             >
-              <ChevronLeft size={24} color="#374151" />
+              <View className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100">
+                <ChevronLeft size={24} color="#374151" />
+                <Text className=" "> Back</Text>
+              </View>
             </Pressable>
 
-            <Text className="text-3xl font-bold text-gray-900 mb-1">Login</Text>
-            <Text className="text-gray-600 text-base mb-4">
-              Fill in your details below to continue
-            </Text>
+            <View className="mb-6 text-center flex justify-center items-center">
+              <Text className="text-3xl font-bold text-gray-900 mb-1">
+                Login
+              </Text>
+              <Text className="text-gray-600 text-base mb-4">
+                Fill in your details below to continue
+              </Text>
+            </View>
           </View>
         </AnimatedFadeSlide>
 
@@ -185,9 +192,9 @@ export default function LoginScreen() {
             </View>
 
             <Text className="text-center text-xs text-gray-500 mt-6 leading-4">
-              By continuing to use Mindvolta, you agree to the{" "}
+              By continuing to use Mindvolta, you agree to the
               <Text className="text-amber-500 underline">terms</Text> and
-              acknowledge our{" "}
+              acknowledge our
               <Text className="text-amber-500 underline">privacy notice</Text>.
             </Text>
           </View>
