@@ -6,6 +6,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   Pressable,
+  SafeAreaView,
   ScrollView,
   StatusBar,
   Text,
@@ -74,31 +75,39 @@ export default function LoginScreen() {
   };
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-      className="flex-1 bg-white"
-    >
-      <StatusBar barStyle="dark-content" backgroundColor="#FFFFFF" />
-
-      <ScrollView
-        className="flex-1"
-        contentContainerStyle={{ flexGrow: 1 }}
-        showsVerticalScrollIndicator={false}
-        keyboardShouldPersistTaps="handled"
+    <SafeAreaView className="flex-1 bg-white py-10">
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        className="flex-1 bg-white"
       >
-        {/* Header */}
-        <AnimatedFadeSlide delay={0} offsetY={-20}>
-          <View className="pt-12 px-6">
-            <Pressable
-              onPress={() => router.back()}
-              className="w-10 h-10 gap-2 flex items-center justify-center mb-6"
-            >
-              <View className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100">
-                <ChevronLeft size={24} color="#374151" />
-                <Text className=" "> Back</Text>
-              </View>
-            </Pressable>
+        <StatusBar barStyle="dark-content" backgroundColor="#FFFFFF" />
 
+        <ScrollView
+          className="flex-1"
+          contentContainerStyle={{
+            flexGrow: 1,
+            justifyContent: "space-between",
+          }}
+          showsVerticalScrollIndicator={false}
+          keyboardShouldPersistTaps="handled"
+        >
+          {/* Header */}
+          <AnimatedFadeSlide delay={0} offsetY={-20}>
+            <View className="pt-4 px-6">
+              <View>
+                <Pressable
+                  onPress={() => router.back()}
+                  className="flex-row items-center space-x-1 mb-6"
+                >
+                  <ChevronLeft size={24} color="#374151" />
+                  <Text className="text-gray-700 text-base">Back</Text>
+                </Pressable>
+              </View>
+            </View>
+          </AnimatedFadeSlide>
+
+          {/* Form */}
+          <AnimatedFadeSlide delay={200}>
             <View className="mb-6 text-center flex justify-center items-center">
               <Text className="text-3xl font-bold text-gray-900 mb-1">
                 Login
@@ -107,99 +116,97 @@ export default function LoginScreen() {
                 Fill in your details below to continue
               </Text>
             </View>
-          </View>
-        </AnimatedFadeSlide>
-
-        {/* Form */}
-        <AnimatedFadeSlide delay={200}>
-          <View className="px-6">
-            <Input
-              label="Email"
-              value={formData.email}
-              onChangeText={(text) => {
-                setFormData((prev) => ({ ...prev, email: text }));
-                if (errors.email) setErrors((prev) => ({ ...prev, email: "" }));
-              }}
-              error={errors.email}
-              keyboardType="email-address"
-              autoCapitalize="none"
-              autoComplete="email"
-            />
-
-            <Input
-              label="Password"
-              value={formData.password}
-              onChangeText={(text) => {
-                setFormData((prev) => ({ ...prev, password: text }));
-                if (errors.password)
-                  setErrors((prev) => ({ ...prev, password: "" }));
-              }}
-              error={errors.password}
-              isPassword
-              autoComplete="password"
-            />
-
-            <Pressable onPress={handleForgotPassword} className="mb-4 mt-2">
-              <Text className="text-amber-500 text-center font-medium">
-                Forgot password?
-              </Text>
-            </Pressable>
-
-            <AuthButton
-              title="Login"
-              onPress={handleLogin}
-              loading={loading}
-              variant={
-                formData.email && formData.password ? "primary" : "secondary"
-              }
-              className="mb-8"
-            />
-          </View>
-        </AnimatedFadeSlide>
-
-        {/* Social Login */}
-        <AnimatedFadeSlide delay={400}>
-          <View className="px-6">
-            <Text className="text-center text-gray-600 mb-6">
-              Or continue with
-            </Text>
-
-            <View className="flex-row justify-center items-center mb-8 space-x-4">
-              <SocialButton
-                provider="google"
-                onPress={() => handleSocialLogin("google")}
+            <View className="px-6">
+              <Input
+                label="Email"
+                value={formData.email}
+                onChangeText={(text) => {
+                  setFormData((prev) => ({ ...prev, email: text }));
+                  if (errors.email)
+                    setErrors((prev) => ({ ...prev, email: "" }));
+                }}
+                error={errors.email}
+                keyboardType="email-address"
+                autoCapitalize="none"
+                autoComplete="email"
               />
-              <SocialButton
-                provider="facebook"
-                onPress={() => handleSocialLogin("facebook")}
-              />
-              <SocialButton
-                provider="apple"
-                onPress={() => handleSocialLogin("apple")}
-              />
-            </View>
-          </View>
-        </AnimatedFadeSlide>
 
-        {/* Footer */}
-        <AnimatedFadeSlide delay={600}>
-          <View className="px-6 pb-8">
-            <View className="flex-row justify-center items-center">
-              <Text className="text-gray-600">Don&#39;t have an account? </Text>
-              <Pressable onPress={() => router.push("/screens/SignupScreen")}>
-                <Text className="text-amber-500 font-semibold">Sign up</Text>
+              <Input
+                label="Password"
+                value={formData.password}
+                onChangeText={(text) => {
+                  setFormData((prev) => ({ ...prev, password: text }));
+                  if (errors.password)
+                    setErrors((prev) => ({ ...prev, password: "" }));
+                }}
+                error={errors.password}
+                isPassword
+                autoComplete="password"
+              />
+
+              <Pressable onPress={handleForgotPassword} className="mb-4 mt-2">
+                <Text className="text-secondary text-right font-medium">
+                  Forgot password?
+                </Text>
               </Pressable>
-            </View>
 
-            <Text className="text-center text-xs text-gray-500 mt-6 leading-4">
-              By continuing to use Mindvolta, you agree to the
-              <Text className="text-amber-500 underline">terms</Text> and
-              acknowledge our
-              <Text className="text-amber-500 underline">privacy notice</Text>.
-            </Text>
-          </View>
-        </AnimatedFadeSlide>
-      </ScrollView>
-    </KeyboardAvoidingView>
+              <AuthButton
+                title="Login"
+                onPress={handleLogin}
+                loading={loading}
+                variant={
+                  formData.email && formData.password ? "primary" : "secondary"
+                }
+                className="mb-8"
+              />
+            </View>
+            {/* Social Login */}
+            <AnimatedFadeSlide delay={400}>
+              <View className="px-6">
+                <Text className="text-center text-gray-600 mb-6">
+                  Or continue with
+                </Text>
+
+                <View className="flex-row justify-center items-center mb-8 space-x-4">
+                  <SocialButton
+                    provider="google"
+                    onPress={() => handleSocialLogin("google")}
+                  />
+                  <SocialButton
+                    provider="facebook"
+                    onPress={() => handleSocialLogin("facebook")}
+                  />
+                  <SocialButton
+                    provider="apple"
+                    onPress={() => handleSocialLogin("apple")}
+                  />
+                </View>
+              </View>
+              <View className="flex-row justify-center items-center">
+                <Text className="text-gray-600">
+                  Don&#39;t have an account?{" "}
+                </Text>
+                <Pressable onPress={() => router.push("/screens/SignupScreen")}>
+                  <Text className="text-amber-500 font-semibold">Sign up</Text>
+                </Pressable>
+              </View>
+            </AnimatedFadeSlide>
+          </AnimatedFadeSlide>
+
+          {/* Footer */}
+          <AnimatedFadeSlide delay={600}>
+            <View className="px-6 pb-8">
+              <Text className="text-center text-xs text-gray-500 mt-6 leading-4">
+                By continuing to use Mindvolta, you agree to the
+                <Text className="text-amber-500 underline">terms</Text> and
+                acknowledge our
+                <Text className="text-amber-500 underline">privacy notice</Text>
+                .
+              </Text>
+            </View>
+          </AnimatedFadeSlide>
+        </ScrollView>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 }

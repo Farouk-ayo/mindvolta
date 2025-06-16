@@ -1,3 +1,5 @@
+import { useRouter } from "expo-router";
+import { ChevronLeft } from "lucide-react-native";
 import React, { useState } from "react";
 import {
   Alert,
@@ -9,8 +11,6 @@ import {
   Text,
   View,
 } from "react-native";
-import { useRouter } from "expo-router";
-import { ChevronLeft } from "lucide-react-native";
 
 import AnimatedFadeSlide from "@/components/AnimatedFadeSlide";
 import AuthButton from "@/components/ui/AuthButton";
@@ -88,7 +88,7 @@ export default function SignupScreen() {
 
       <ScrollView
         className="flex-1"
-        contentContainerStyle={{ flexGrow: 1 }}
+        contentContainerStyle={{ flexGrow: 1, justifyContent: "space-between" }}
         showsVerticalScrollIndicator={false}
         keyboardShouldPersistTaps="handled"
       >
@@ -97,11 +97,17 @@ export default function SignupScreen() {
           <View className="pt-12 px-6">
             <Pressable
               onPress={() => router.back()}
-              className="w-10 h-10 items-center justify-center mb-6"
+              className="flex-row items-center mb-6"
             >
               <ChevronLeft size={24} color="#374151" />
+              <Text className="ml-2 text-gray-700 text-base">Back</Text>
             </Pressable>
+          </View>
+        </AnimatedFadeSlide>
 
+        {/* Form */}
+        <AnimatedFadeSlide delay={200}>
+          <View className="mb-6 text-center flex justify-center items-center">
             <Text className="text-3xl font-bold text-gray-900 mb-2">
               Create an account
             </Text>
@@ -109,10 +115,7 @@ export default function SignupScreen() {
               Fill in your details below to get started
             </Text>
           </View>
-        </AnimatedFadeSlide>
 
-        {/* Form */}
-        <AnimatedFadeSlide delay={200}>
           <View className="px-6 pt-8">
             <Input
               label="Email"
@@ -147,7 +150,7 @@ export default function SignupScreen() {
               </Text>
             )}
 
-            <Input
+            {/* <Input
               label="Confirm Password"
               value={formData.confirmPassword}
               onChangeText={(text) => {
@@ -158,7 +161,7 @@ export default function SignupScreen() {
               error={errors.confirmPassword}
               isPassword
               autoComplete="new-password"
-            />
+            /> */}
 
             <AuthButton
               title="Create an account"
@@ -174,8 +177,9 @@ export default function SignupScreen() {
         <AnimatedFadeSlide delay={400}>
           <View className="px-6">
             <Text className="text-center text-gray-600 mb-6">
-              Or Sign up with
+              Or continue with
             </Text>
+
             <View className="flex-row justify-center items-center mb-8 space-x-4">
               <SocialButton
                 provider="google"
@@ -191,28 +195,28 @@ export default function SignupScreen() {
               />
             </View>
           </View>
+          <View className="flex-row justify-center items-center">
+            <Text className="text-gray-600">Already have an account? </Text>
+            <Pressable onPress={() => router.push("/screens/LoginScreen")}>
+              <Text className="text-primary font-medium">Sign in</Text>
+            </Pressable>
+          </View>
         </AnimatedFadeSlide>
 
         {/* Footer */}
         <AnimatedFadeSlide delay={600}>
           <View className="px-6 pb-8">
-            <View className="flex-row justify-center items-center">
-              <Text className="text-gray-600">Already have an account? </Text>
-              <Pressable onPress={() => router.push("/screens/LoginScreen")}>
-                <Text className="text-green-600 font-medium">Log in</Text>
-              </Pressable>
-            </View>
-            <Text className="text-center text-gray-500 text-xs mt-4">
-              By signing up, you agree to our
+            <Text className="text-center text-gray-500 text-xs mt-4 leading-4">
+              By signing up, you agree to our{" "}
               <Text
-                className="text-green-600 font-medium underline"
+                className="text-primary font-medium underline"
                 onPress={() => router.push("/")}
               >
                 Terms of Service
-              </Text>
-              and
+              </Text>{" "}
+              and{" "}
               <Text
-                className="text-green-600 font-medium underline"
+                className="text-primary font-medium underline"
                 onPress={() => router.push("/")}
               >
                 Privacy Policy
