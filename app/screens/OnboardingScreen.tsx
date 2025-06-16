@@ -186,7 +186,7 @@ export default function OnboardingScreen() {
           <Animated.View style={buttonStyle}>
             <Button
               title="Start Now"
-              onPress={() => router.push("/")}
+              onPress={() => router.push("/screens/LoginScreen")}
               className="w-full py-4 bg-secondary rounded-full shadow-lg"
             />
           </Animated.View>
