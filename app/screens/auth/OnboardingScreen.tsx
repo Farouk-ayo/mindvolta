@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/Buttons/Button";
 import { useRouter } from "expo-router";
 import React, { useEffect } from "react";
 import { Image, Pressable, StatusBar, Text, View } from "react-native";
@@ -162,7 +162,7 @@ export default function OnboardingScreen() {
       <View className="flex-1 items-center justify-center">
         <Animated.View style={iconStyle} className="items-center mb-8">
           <Image
-            source={require("../../assets/icons/logo-2.png")}
+            source={require("../../../assets/icons/logo-2.png")}
             className="w-28 h-28"
             resizeMode="contain"
           />

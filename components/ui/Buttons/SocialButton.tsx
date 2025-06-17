@@ -27,25 +27,25 @@ const SocialButton: React.FC<SocialButtonProps> = ({
     switch (provider) {
       case "google":
         return {
-          icon: require("../../assets/icons/google.png"),
+          icon: require("../../../assets/icons/google.png"),
           backgroundColor: "#FFFFFF",
           borderColor: "#E5E7EB",
         };
       case "facebook":
         return {
-          icon: require("../../assets/icons/facebook.png"),
+          icon: require("../../../assets/icons/facebook.png"),
           backgroundColor: "#FFFFFF",
           borderColor: "#E5E7EB",
         };
       case "apple":
         return {
-          icon: require("../../assets/icons/apple.png"),
+          icon: require("../../../assets/icons/apple.png"),
           backgroundColor: "#000FFFFFF000",
           borderColor: "#E5E7EB",
         };
       default:
         return {
-          icon: require("../../assets/icons/google.png"),
+          icon: require("../../../assets/icons/google.png"),
           backgroundColor: "#FFFFFF",
           borderColor: "#E5E7EB",
         };

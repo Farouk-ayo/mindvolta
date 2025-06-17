@@ -13,9 +13,9 @@ import {
 } from "react-native";
 
 import AnimatedFadeSlide from "@/components/AnimatedFadeSlide";
-import AuthButton from "@/components/ui/AuthButton";
+import AuthButton from "@/components/ui/Buttons/AuthButton";
+import SocialButton from "@/components/ui/Buttons/SocialButton";
 import Input from "@/components/ui/Input";
-import SocialButton from "@/components/ui/SocialButton";
 
 export default function SignupScreen() {
   const router = useRouter();
