@@ -1,6 +1,6 @@
-import { forwardRef, useState } from "react";
-import { TextInput, TextInputProps, View, Text, Pressable } from "react-native";
 import { Eye, EyeOff } from "lucide-react-native";
+import { forwardRef, useState } from "react";
+import { Pressable, Text, TextInput, TextInputProps, View } from "react-native";
 
 type InputProps = {
   label: string;
@@ -32,7 +32,7 @@ const Input = forwardRef<TextInput, InputProps>(
           {isPassword && (
             <Pressable
               onPress={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-3"
+              className="absolute right-3 top-[50%] transform -translate-y-1/2"
             >
               {showPassword ? (
                 <EyeOff size={20} color="#9CA3AF" />

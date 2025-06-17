@@ -115,7 +115,6 @@ export default function SignupScreen() {
               Fill in your details below to get started
             </Text>
           </View>
-
           <View className="px-6 pt-8">
             <Input
               label="Email"
@@ -170,11 +169,7 @@ export default function SignupScreen() {
               variant={isFormValid ? "primary" : "secondary"}
               className="mb-8 mt-4"
             />
-          </View>
-        </AnimatedFadeSlide>
-
-        {/* Social Signup */}
-        <AnimatedFadeSlide delay={400}>
+          </View>{" "}
           <View className="px-6">
             <Text className="text-center text-gray-600 mb-6">
               Or continue with
@@ -202,6 +197,8 @@ export default function SignupScreen() {
             </Pressable>
           </View>
         </AnimatedFadeSlide>
+
+        {/* Social Signup */}
 
         {/* Footer */}
         <AnimatedFadeSlide delay={600}>
