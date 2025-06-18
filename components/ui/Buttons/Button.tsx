@@ -31,8 +31,7 @@ export const Button: React.FC<ButtonProps> = ({
   const pressed = useSharedValue(0);
 
   const triggerHaptic = () => {
-    // Add haptic feedback here if needed
-    // Haptics.impactLight();
+    // Optional: Add haptic feedback here
   };
 
   const animatedStyle = useAnimatedStyle(() => {
@@ -68,11 +67,16 @@ export const Button: React.FC<ButtonProps> = ({
     lg: "text-lg",
   };
 
+  const bgClass =
+    variant === "primary"
+      ? "bg-secondary active:bg-secondary/80"
+      : "bg-primary active:bg-primary/80";
+
   return (
     <AnimatedPressable
       style={animatedStyle}
       className={`
-        bg-green-600 active:bg-green-700
+        ${bgClass}
         ${sizeClasses[size]}
         rounded-full
         items-center

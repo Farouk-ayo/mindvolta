@@ -1,5 +1,6 @@
 import { MoodButton } from "@/components/ui/Buttons/MoodButton";
 import { moodImages } from "@/constants/icons";
+import { useRouter } from "expo-router";
 import React from "react";
 import {
   Image,
@@ -34,19 +35,23 @@ const moods = [
 ];
 
 export const HomeScreen: React.FC = () => {
+  const router = useRouter();
   const handleMoodPress = (mood: string) => {
     console.log("Selected mood:", mood);
     alert(`You're feeling ${mood} today`);
   };
 
   const handleMindvoltraPress = () => {
-    console.log("Ask Mindvoltra AI pressed");
     alert("Opening Mindvoltra AI...");
+    router.push("/screens/chat/ChatScreen");
   };
 
   const handleListenNow = () => {
     console.log("Listen Now pressed");
     alert("Starting calming music...");
+  };
+  const handleClickHere = () => {
+    router.push("/screens/flow/NameInputScreen");
   };
 
   return (
@@ -81,9 +86,9 @@ export const HomeScreen: React.FC = () => {
             resizeMode="contain"
           />
           <Text className="text-gray-500 text-base flex-1">
-            Ask{" "}
-            <Text className="text-secondary font-medium">Mindvoltra AI</Text>{" "}
-            for your mental health issues
+            Ask&nbsp;
+            <Text className="text-secondary font-medium">Mindvoltra AI</Text>
+            &nbsp; for your mental health issues
           </Text>
         </Pressable>
       </View>
@@ -95,7 +100,7 @@ export const HomeScreen: React.FC = () => {
             <Text className="text-lg font-bold text-gray-900">
               Complete these steps 1/5
             </Text>
-            <Pressable>
+            <Pressable onPress={handleClickHere}>
               <Text className="text-secondary text-sm font-medium">
                 Click here
               </Text>
@@ -153,7 +158,7 @@ export const HomeScreen: React.FC = () => {
                   source={require("../../../assets/icons/play.png")}
                   className="w-5 h-5"
                   resizeMode="contain"
-                />{" "}
+                />
               </Pressable>
             </View>
             <View className="items-center justify-center w-16 h-16 bg-green-100 rounded-xl">
@@ -178,7 +183,7 @@ export const HomeScreen: React.FC = () => {
               </Text>
               <Text className="text-gray-600 text-sm leading-5 flex-1 mr-4">
                 It is better to conquer yourself than to win a thousand
-                battles...{" "}
+                battles...&nbsp;
                 <Text className="text-primary font-medium">read more</Text>
               </Text>
             </View>

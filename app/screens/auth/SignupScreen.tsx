@@ -169,7 +169,7 @@ export default function SignupScreen() {
               variant={isFormValid ? "primary" : "secondary"}
               className="mb-8 mt-4"
             />
-          </View>{" "}
+          </View>
           <View className="px-6">
             <Text className="text-center text-gray-600 mb-6">
               Or continue with
@@ -204,14 +204,14 @@ export default function SignupScreen() {
         <AnimatedFadeSlide delay={600}>
           <View className="px-6 pb-8">
             <Text className="text-center text-gray-500 text-xs mt-4 leading-4">
-              By signing up, you agree to our{" "}
+              By signing up, you agree to our&nbsp;
               <Text
                 className="text-primary font-medium underline"
                 onPress={() => router.push("/")}
               >
                 Terms of Service
-              </Text>{" "}
-              and{" "}
+              </Text>
+              &nbsp; and&nbsp;
               <Text
                 className="text-primary font-medium underline"
                 onPress={() => router.push("/")}
