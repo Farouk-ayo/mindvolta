@@ -183,7 +183,9 @@ export default function LoginScreen() {
             </View>
             <View className="flex-row justify-center items-center">
               <Text className="text-gray-600">Don&#39;t have an account? </Text>
-              <Pressable onPress={() => router.push("/screens/SignupScreen")}>
+              <Pressable
+                onPress={() => router.push("/screens/auth/SignupScreen")}
+              >
                 <Text className="text-amber-500 font-semibold">Sign up</Text>
               </Pressable>
             </View>

@@ -116,7 +116,7 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
         className="items-center justify-center"
       >
         <Image
-          source={require("../../assets/icons/logo.png")}
+          source={require("../../assets/images/logo.png")}
           className="w-72 h-28"
           resizeMode="contain"
         />

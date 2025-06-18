@@ -162,7 +162,7 @@ export default function OnboardingScreen() {
       <View className="flex-1 items-center justify-center">
         <Animated.View style={iconStyle} className="items-center mb-8">
           <Image
-            source={require("../../../assets/icons/logo-2.png")}
+            source={require("../../../assets/images/logo-2.png")}
             className="w-28 h-28"
             resizeMode="contain"
           />
@@ -186,7 +186,7 @@ export default function OnboardingScreen() {
           <Animated.View style={buttonStyle}>
             <Button
               title="Start Now"
-              onPress={() => router.push("/screens/LoginScreen")}
+              onPress={() => router.push("/screens/auth/LoginScreen")}
               className="w-full py-4 bg-secondary rounded-full shadow-lg"
             />
           </Animated.View>

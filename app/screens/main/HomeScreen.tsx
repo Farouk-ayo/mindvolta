@@ -1,13 +1,36 @@
 import { MoodButton } from "@/components/ui/Buttons/MoodButton";
+import { moodImages } from "@/constants/icons";
 import React from "react";
-import { Pressable, SafeAreaView, ScrollView, Text, View } from "react-native";
+import {
+  Image,
+  Pressable,
+  SafeAreaView,
+  ScrollView,
+  Text,
+  View,
+} from "react-native";
 
 const moods = [
-  { emoji: "😊", label: "Happy", color: "bg-pink-200" },
-  { emoji: "😌", label: "Calm", color: "bg-purple-200" },
-  { emoji: "😰", label: "Manic", color: "bg-cyan-200" },
-  { emoji: "😠", label: "Angry", color: "bg-orange-200" },
-  { emoji: "😢", label: "Sad", color: "bg-green-200" },
+  {
+    label: "Happy",
+    color: "bg-[#EF5DA8]",
+  },
+  {
+    label: "Calm",
+    color: "bg-[#AEAFF7]",
+  },
+  {
+    label: "Manic",
+    color: "bg-[#A0E3E2]",
+  },
+  {
+    label: "Angry",
+    color: "bg-[#F09E54]",
+  },
+  {
+    label: "Sad",
+    color: "bg-[#C3F2A6]",
+  },
 ];
 
 export const HomeScreen: React.FC = () => {
@@ -27,8 +50,7 @@ export const HomeScreen: React.FC = () => {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-gray-50">
-      {/* Header */}
+    <SafeAreaView className="flex-1 bg-white">
       <View className="px-4 pt-4 pb-6 bg-white">
         <View className="flex-row items-center justify-between mb-6">
           <View className="flex-row items-center">
@@ -40,18 +62,28 @@ export const HomeScreen: React.FC = () => {
               <Text className="text-xl font-bold text-gray-900">Samanda</Text>
             </View>
           </View>
-          <Pressable className="p-2">
-            <Text className="text-gray-400 text-xl">🔔</Text>
+          <Pressable className="p-2 bg-gray-100 rounded-full">
+            <Image
+              source={require("../../../assets/icons/notification.png")}
+              className="w-10 h-10"
+              resizeMode="contain"
+            />
           </Pressable>
         </View>
 
-        {/* Ask Mindvoltra AI */}
         <Pressable
-          className="bg-gray-50 rounded-full px-4 py-3 flex-row items-center active:bg-gray-100"
+          className="bg-transparent border border-secondary rounded-full px-4 py-3 flex-row items-center active:bg-gray-100"
           onPress={handleMindvoltraPress}
         >
+          <Image
+            source={require("../../../assets/icons/search.png")}
+            className="w-5 h-5 mr-3"
+            resizeMode="contain"
+          />
           <Text className="text-gray-500 text-base flex-1">
-            🔍 Ask Mindvoltra AI for your mental health issues
+            Ask{" "}
+            <Text className="text-secondary font-medium">Mindvoltra AI</Text>{" "}
+            for your mental health issues
           </Text>
         </Pressable>
       </View>
@@ -64,7 +96,7 @@ export const HomeScreen: React.FC = () => {
               Complete these steps 1/5
             </Text>
             <Pressable>
-              <Text className="text-blue-500 text-sm font-medium">
+              <Text className="text-secondary text-sm font-medium">
                 Click here
               </Text>
             </Pressable>
@@ -77,25 +109,31 @@ export const HomeScreen: React.FC = () => {
           <Text className="text-base font-semibold text-gray-900 mb-4">
             How are you feeling today?
           </Text>
-          <View className="flex-row justify-between">
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{ paddingHorizontal: 16 }}
+            className="mb-6"
+          >
             {moods.map((mood, index) => (
-              <MoodButton
-                key={index}
-                emoji={mood.emoji}
-                label={mood.label}
-                color={mood.color}
-                onPress={() => handleMoodPress(mood.label)}
-              />
+              <View key={index} className="mr-4">
+                <MoodButton
+                  label={mood.label}
+                  color={mood.color}
+                  imageSource={moodImages[mood.label.toLowerCase()]}
+                  onPress={() => handleMoodPress(mood.label)}
+                />
+              </View>
             ))}
-          </View>
+          </ScrollView>
         </View>
 
         {/* Today's Playlist */}
         <View className="px-4 mb-6">
-          <Text className="text-lg font-bold text-gray-900 mb-4">
+          <Text className="text-lg font-semibold text-gray-900 mb-4">
             Today&apos;s playlist
           </Text>
-          <View className="bg-green-50 rounded-2xl p-4 flex-row items-center">
+          <View className="bg-secondary/10 rounded-2xl p-4 flex-row items-center">
             <View className="flex-1 mr-4">
               <Text className="text-lg font-bold text-gray-900 mb-2">
                 Calming Music
@@ -105,50 +143,66 @@ export const HomeScreen: React.FC = () => {
                 listen to it...
               </Text>
               <Pressable
-                className="bg-green-600 rounded-full px-4 py-2 flex-row items-center self-start active:bg-green-700"
+                className=" rounded-full flex-row items-center self-start "
                 onPress={handleListenNow}
               >
-                <Text className="text-white font-semibold text-sm mr-2">
+                <Text className=" font-semibold text-sm mr-2 text-secondary">
                   Listen Now
                 </Text>
-                <Text className="text-white">▶️</Text>
+                <Image
+                  source={require("../../../assets/icons/play.png")}
+                  className="w-5 h-5"
+                  resizeMode="contain"
+                />{" "}
               </Pressable>
             </View>
             <View className="items-center justify-center w-16 h-16 bg-green-100 rounded-xl">
-              <Text className="text-2xl">🎵</Text>
+              <Image
+                source={require("../../../assets/icons/music.png")}
+                className="w-20 h-20"
+                resizeMode="contain"
+              />
             </View>
           </View>
         </View>
 
         {/* Thought of the day */}
         <View className="px-4 mb-6">
-          <Text className="text-lg font-bold text-gray-900 mb-4">
+          <Text className="text-lg font-semibold text-gray-900 mb-4">
             Thought of the day
           </Text>
-          <View className="bg-white rounded-2xl p-4 shadow-sm border border-gray-100">
-            <Text className="text-base font-semibold text-gray-900 mb-2">
-              Who said you can&apos;t do it?
-            </Text>
-            <View className="flex-row items-center">
+          <View className="bg-primary/10 rounded-2xl p-4 flex-row items-centerm">
+            <View className="flex-1 mr-4">
+              <Text className="text-base font-semibold text-gray-900 mb-2">
+                Who said you can&apos;t do it?
+              </Text>
               <Text className="text-gray-600 text-sm leading-5 flex-1 mr-4">
                 It is better to conquer yourself than to win a thousand
                 battles...{" "}
-                <Text className="text-orange-500 font-medium">read more</Text>
+                <Text className="text-primary font-medium">read more</Text>
               </Text>
-              <View className="w-12 h-12 bg-yellow-100 rounded-lg items-center justify-center">
-                <Text className="text-2xl">🧠</Text>
+            </View>
+
+            <View className="flex-row items-center">
+              <View className="items-center justify-center w-16 h-16  rounded-xl">
+                <Image
+                  source={require("../../../assets/icons/thought.png")}
+                  className="w-20 h-20"
+                  resizeMode="contain"
+                />
               </View>
             </View>
           </View>
         </View>
-
-        <View className="h-20" />
       </ScrollView>
 
       {/* Call Button - Floating */}
-      <View className="absolute bottom-24 right-4">
-        <Pressable className="w-14 h-14 bg-green-600 rounded-full items-center justify-center shadow-lg active:scale-95">
-          <Text className="text-white text-xl">📞</Text>
+      <View className="absolute bottom-4 right-4">
+        <Pressable className="w-14 h-14 bg-secondary rounded-full items-center justify-center shadow-lg active:scale-95">
+          <Image
+            source={require("../../../assets/icons/call.png")}
+            resizeMode="contain"
+          />
         </Pressable>
       </View>
     </SafeAreaView>

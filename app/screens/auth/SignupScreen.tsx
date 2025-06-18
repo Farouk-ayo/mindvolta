@@ -63,7 +63,7 @@ export default function SignupScreen() {
       await new Promise((resolve) => setTimeout(resolve, 2000));
 
       Alert.alert("Success", "Account created successfully!", [
-        { text: "OK", onPress: () => router.push("/screens/LoginScreen") },
+        { text: "OK", onPress: () => router.push("/screens/auth/LoginScreen") },
       ]);
     } catch {
       Alert.alert("Error", "Failed to create account. Please try again.");
@@ -192,7 +192,7 @@ export default function SignupScreen() {
           </View>
           <View className="flex-row justify-center items-center">
             <Text className="text-gray-600">Already have an account? </Text>
-            <Pressable onPress={() => router.push("/screens/LoginScreen")}>
+            <Pressable onPress={() => router.push("/screens/auth/LoginScreen")}>
               <Text className="text-primary font-medium">Sign in</Text>
             </Pressable>
           </View>

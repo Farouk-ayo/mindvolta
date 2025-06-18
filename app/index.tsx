@@ -1,18 +1,29 @@
+// app/index.tsx
 import { useRouter } from "expo-router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { View, ActivityIndicator } from "react-native";
 import SplashScreen from "./screens/SplashScreen";
 
 export default function Index() {
   const router = useRouter();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      // router.replace("/screens/OnboardingScreen");
-      router.replace("/(tabs)/index");
-    }, 5000); // 2-second splash
+      setLoading(false);
+      router.replace("/(tabs)"); // or "/onboarding"
+    }, 2000); // show for 2 seconds
 
     return () => clearTimeout(timeout);
   }, [router]);
 
-  return <SplashScreen />;
+  if (loading) {
+    return <SplashScreen />;
+  }
+
+  return (
+    <View>
+      <ActivityIndicator size="large" />
+    </View>
+  );
 }

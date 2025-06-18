@@ -1,4 +1,4 @@
-export const icons = {
+export const tabIcons = {
   home: require("@/assets/icons/home.png"),
   homeActive: require("@/assets/icons/home-active.png"),
   explore: require("@/assets/icons/explore.png"),
@@ -9,4 +9,12 @@ export const icons = {
   communityActive: require("@/assets/icons/community-active.png"),
   account: require("@/assets/icons/account.png"),
   accountActive: require("@/assets/icons/account-active.png"),
+};
+
+export const moodImages: Record<string, any> = {
+  happy: require("../assets/icons/happy.png"),
+  calm: require("../assets/icons/calm.png"),
+  manic: require("../assets/icons/manic.png"),
+  angry: require("../assets/icons/angry.png"),
+  sad: require("../assets/icons/sad.png"),
 };
