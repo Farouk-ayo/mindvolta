@@ -1,9 +1,9 @@
 import { Button } from "@/components/ui/Buttons/Button";
 import { CheckboxOption } from "@/components/ui/CheckboxOption";
+import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import { ScrollView, View } from "react-native";
-import { StepLayout } from "./_layout";
-import { useRouter } from "expo-router";
+import { StepLayout } from "./StepLayout";
 
 const options = [
   "Work/School",

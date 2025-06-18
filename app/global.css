@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --font-sans: DMSans_400Regular;
+  --font-medium: DMSans_500Medium;
+  --font-bold: DMSans_700Bold;
+}
