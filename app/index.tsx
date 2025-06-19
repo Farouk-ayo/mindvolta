@@ -1,14 +1,26 @@
 // app/index.tsx
-import { useRouter } from "expo-router";
-import { useEffect, useState } from "react";
-import { View, ActivityIndicator, Text } from "react-native";
-import SplashScreen from "./screens/SplashScreen";
+// import {
+//   Alegreya_400Regular,
+//   Alegreya_700Bold,
+// } from "@expo-google-fonts/alegreya";
+// import {
+//   AlegreyaSans_400Regular,
+//   AlegreyaSans_700Bold,
+// } from "@expo-google-fonts/alegreya-sans";
 import {
-  useFonts,
   DMSans_400Regular,
   DMSans_500Medium,
   DMSans_700Bold,
+  useFonts,
 } from "@expo-google-fonts/dm-sans";
+import {
+  Epilogue_400Regular,
+  Epilogue_700Bold,
+} from "@expo-google-fonts/epilogue";
+import { useRouter } from "expo-router";
+import { useEffect, useState } from "react";
+import { ActivityIndicator, Text, View } from "react-native";
+import SplashScreen from "./screens/SplashScreen";
 
 export default function Index() {
   const router = useRouter();
@@ -17,6 +29,12 @@ export default function Index() {
     DMSans_400Regular,
     DMSans_500Medium,
     DMSans_700Bold,
+    // Alegreya_400Regular,
+    // Alegreya_700Bold,
+    // AlegreyaSans_400Regular,
+    // AlegreyaSans_700Bold,
+    Epilogue_400Regular,
+    Epilogue_700Bold,
   });
 
   useEffect(() => {

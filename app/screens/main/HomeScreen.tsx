@@ -47,7 +47,7 @@ export const HomeScreen: React.FC = () => {
   };
 
   const handleListenNow = () => {
-    console.log("Listen Now pressed");
+    router.push("/screens/music/MusicPlayerScreen");
     alert("Starting calming music...");
   };
   const handleClickHere = () => {
@@ -85,7 +85,7 @@ export const HomeScreen: React.FC = () => {
             className="w-5 h-5 mr-3"
             resizeMode="contain"
           />
-          <Text className="text-gray-500 text-base flex-1">
+          <Text className="text-gray-500 text-sm flex-1">
             Ask&nbsp;
             <Text className="text-secondary font-medium">Mindvoltra AI</Text>
             &nbsp; for your mental health issues
@@ -114,21 +114,25 @@ export const HomeScreen: React.FC = () => {
           <Text className="text-base font-semibold text-gray-900 mb-4">
             How are you feeling today?
           </Text>
+
           <ScrollView
             horizontal
             showsHorizontalScrollIndicator={false}
-            contentContainerStyle={{ paddingHorizontal: 16 }}
-            className="mb-6"
+            contentContainerStyle={{
+              paddingLeft: 0,
+              paddingRight: 16,
+              gap: 16,
+            }}
+            className="mb-6 -mx-4 px-4 w-full"
           >
             {moods.map((mood, index) => (
-              <View key={index} className="mr-4">
-                <MoodButton
-                  label={mood.label}
-                  color={mood.color}
-                  imageSource={moodImages[mood.label.toLowerCase()]}
-                  onPress={() => handleMoodPress(mood.label)}
-                />
-              </View>
+              <MoodButton
+                key={index}
+                label={mood.label}
+                color={mood.color}
+                imageSource={moodImages[mood.label.toLowerCase()]}
+                onPress={() => handleMoodPress(mood.label)}
+              />
             ))}
           </ScrollView>
         </View>
@@ -178,7 +182,7 @@ export const HomeScreen: React.FC = () => {
           </Text>
           <View className="bg-primary/10 rounded-2xl p-4 flex-row items-centerm">
             <View className="flex-1 mr-4">
-              <Text className="text-base font-semibold text-gray-900 mb-2">
+              <Text className="text-base font-bold font-alegreya text-gray-900 mb-2">
                 Who said you can&apos;t do it?
               </Text>
               <Text className="text-gray-600 text-sm leading-5 flex-1 mr-4">

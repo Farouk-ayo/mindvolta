@@ -8,6 +8,10 @@ module.exports = {
         sans: ["DMSans_400Regular"],
         medium: ["DMSans_500Medium"],
         bold: ["DMSans_700Bold"],
+        // alegreya: ["Alegreya_400Regular"],
+        // alegreyaBold: ["Alegreya_700Bold"],
+        // alegreyaSans: ["AlegreyaSans_400Regular"],
+        epilogue: ["Epilogue_400Regular"],
       },
       fontSize: {
         base: 18,
