@@ -13,8 +13,8 @@ import {
 } from "react-native";
 
 import AnimatedFadeSlide from "@/components/AnimatedFadeSlide";
-import AuthButton from "@/components/ui/Buttons/AuthButton";
-import SocialButton from "@/components/ui/Buttons/SocialButton";
+import AuthButton from "@/components/ui/buttons/AuthButton";
+import SocialButton from "@/components/ui/buttons/SocialButton";
 import Input from "@/components/ui/Input";
 
 export default function SignupScreen() {

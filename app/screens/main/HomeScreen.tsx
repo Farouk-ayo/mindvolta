@@ -1,4 +1,4 @@
-import { MoodButton } from "@/components/ui/Buttons/MoodButton";
+import { MoodButton } from "@/components/ui/buttons/MoodButton";
 import { moodImages } from "@/constants/icons";
 import { useRouter } from "expo-router";
 import React from "react";

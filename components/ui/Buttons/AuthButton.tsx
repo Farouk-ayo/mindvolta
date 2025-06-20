@@ -1,5 +1,5 @@
 import React from "react";
-import { Pressable, Text, ActivityIndicator } from "react-native";
+import { Pressable, ActivityIndicator } from "react-native";
 import Animated, {
   useSharedValue,
   useAnimatedStyle,

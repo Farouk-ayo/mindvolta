@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/Buttons/Button";
+import { Button } from "@/components/ui/buttons/Button";
 import { useRouter } from "expo-router";
 import React, { useEffect } from "react";
 import { Image, Pressable, StatusBar, Text, View } from "react-native";
