@@ -118,7 +118,7 @@ export default function VerifyEmailScreen() {
               maxLength={1}
               className={`w-12 h-14 rounded-xl border-2 text-center text-lg font-semibold ${
                 loading === "redirecting"
-                  ? "border-green-500"
+                  ? "border-secondary"
                   : "border-gray-300"
               }`}
             />

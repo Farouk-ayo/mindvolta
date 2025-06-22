@@ -165,7 +165,7 @@ export const HomeScreen: React.FC = () => {
                 />
               </Pressable>
             </View>
-            <View className="items-center justify-center w-16 h-16 bg-green-100 rounded-xl">
+            <View className="items-center justify-center w-16 h-16 bg-secondary rounded-xl">
               <Image
                 source={require("../../../assets/icons/music.png")}
                 className="w-20 h-20"

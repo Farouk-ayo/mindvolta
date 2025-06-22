@@ -15,8 +15,8 @@ export const AlbumArt: React.FC<AlbumArtProps> = ({ source }) => (
           resizeMode="cover"
         />
       </View>
-      <View className="absolute -top-2 -right-2 w-6 h-6 bg-yellow-400 rounded-full opacity-80" />
-      <View className="absolute -bottom-3 -left-3 w-4 h-4 bg-green-400 rounded-full opacity-70" />
+      <View className="absolute -top-2 -right-2 w-6 h-6 bg-primary rounded-full opacity-80" />
+      <View className="absolute -bottom-3 -left-3 w-4 h-4 bg-secondary rounded-full opacity-70" />
     </View>
   </View>
 );

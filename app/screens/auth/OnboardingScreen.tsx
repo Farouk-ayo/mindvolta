@@ -170,7 +170,7 @@ export default function OnboardingScreen() {
 
         <Animated.Text
           style={titleStyle}
-          className="text-green-900 text-3xl font-bold text-center leading-tight px-4 mb-6"
+          className="text-secondary text-3xl font-bold text-center leading-tight px-4 mb-6"
         >
           For Your Mental Health{"\n"}Issues
         </Animated.Text>

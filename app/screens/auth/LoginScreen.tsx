@@ -13,6 +13,7 @@ import {
 import AnimatedFadeSlide from "@/components/AnimatedFadeSlide";
 import LoginForm from "@/components/ui/auth/LoginForm";
 import SocialLogins from "@/components/ui/auth/SocialLogins";
+import NavigateBack from "@/components/ui/auth/NavigateBack";
 
 export default function LoginScreen() {
   const router = useRouter();
@@ -33,18 +34,7 @@ export default function LoginScreen() {
           showsVerticalScrollIndicator={false}
           keyboardShouldPersistTaps="handled"
         >
-          <AnimatedFadeSlide delay={0} offsetY={-20}>
-            <View className="pt-4 px-6">
-              <Pressable
-                onPress={() => router.back()}
-                className="flex-row items-center space-x-1 mb-6"
-              >
-                <ChevronLeft size={24} color="#374151" />
-                <Text className="text-gray-700 text-base">Back</Text>
-              </Pressable>
-            </View>
-          </AnimatedFadeSlide>
-
+          <NavigateBack />
           <AnimatedFadeSlide delay={200}>
             <View className="mb-6 text-center flex justify-center items-center">
               <Text className="text-3xl font-bold text-gray-900 mb-1">
@@ -67,7 +57,6 @@ export default function LoginScreen() {
               </Pressable>
             </View>
           </AnimatedFadeSlide>
-
           <AnimatedFadeSlide delay={600}>
             <View className="px-6 pb-8">
               <Text className="text-center text-xs text-gray-500 mt-6 leading-4">

@@ -1,13 +1,12 @@
 import AnimatedFadeSlide from "@/components/AnimatedFadeSlide";
+import NavigateBack from "@/components/ui/auth/NavigateBack";
 import SignupForm from "@/components/ui/auth/SignupForm";
 import SocialButton from "@/components/ui/buttons/SocialButton";
 import { useRouter } from "expo-router";
-import { ChevronLeft } from "lucide-react-native";
 import {
   Alert,
   KeyboardAvoidingView,
   Platform,
-  Pressable,
   ScrollView,
   StatusBar,
   Text,
@@ -32,13 +31,9 @@ export default function SignupScreen() {
         contentContainerStyle={{ flexGrow: 1, justifyContent: "space-between" }}
         keyboardShouldPersistTaps="handled"
       >
+        <NavigateBack />
         <AnimatedFadeSlide delay={0} offsetY={-20}>
           <View className="pt-12 px-6">
-            <ChevronLeft
-              size={24}
-              color="#374151"
-              onPress={() => router.back()}
-            />
             <Text className="text-3xl font-bold mt-6 text-gray-900">
               Create an account
             </Text>

@@ -26,7 +26,7 @@ const FinalStepCompleteScreen = () => {
           className="w-36 h-36 mb-6"
           resizeMode="contain"
         />
-        <Text className="text-center text-lg font-bold text-green-900 mb-3">
+        <Text className="text-center text-lg font-bold text-secondary mb-3">
           Thanks for allowing us{"\n"}to serve you better!
         </Text>
         <Text className="text-center text-sm text-black/80 px-6">
@@ -34,7 +34,7 @@ const FinalStepCompleteScreen = () => {
           the best of mental health solutions
         </Text>{" "}
         <TouchableOpacity
-          className="w-[90%] bg-green-800 py-4 rounded-full mt-5"
+          className="w-[90%] bg-secondary py-4 rounded-full mt-5"
           onPress={handleGoHome}
         >
           <Text className="text-white text-center font-semibold text-base">
