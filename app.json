@@ -16,7 +16,8 @@
         "foregroundImage": "./assets/images/logo.png",
         "backgroundColor": "#FFB810"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.yourname.yourapp"
     },
     "web": {
       "bundler": "metro",
@@ -37,6 +38,12 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "d9f68e88-a8de-4f4b-9b8c-bdba34f7c599"
+      }
     }
   }
 }

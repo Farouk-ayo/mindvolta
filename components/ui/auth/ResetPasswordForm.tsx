@@ -1,13 +1,12 @@
-import { useRouter } from "expo-router";
 import { useState } from "react";
 import {
-  Text,
-  View,
-  TextInput,
-  Pressable,
   ActivityIndicator,
+  Pressable,
+  Text,
+  TextInput,
+  View,
 } from "react-native";
-import { useResetPassword } from "@clerk/clerk-expo";
+// import { useResetPassword } from "@clerk/clerk-expo";
 import Toast from "react-native-toast-message";
 
 const passwordRules = [
@@ -24,8 +23,8 @@ const passwordRules = [
 ];
 
 export default function ResetPasswordForm() {
-  const router = useRouter();
-  const { isLoaded, setPassword, setActive, status } = useResetPassword();
+  // const router = useRouter();
+  // const { isLoaded, setPassword, setActive, status } = useResetPassword();
 
   const [password, setPasswordInput] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -36,23 +35,22 @@ export default function ResetPasswordForm() {
     password && confirmPassword && password === confirmPassword && allValid;
 
   const handleSubmit = async () => {
-    if (!canSubmit || !isLoaded) return;
+    // if (!canSubmit || !isLoaded) return;
 
     setLoading(true);
 
     try {
-      const result = await setPassword({ password });
-
-      if (result.status === "complete") {
-        await setActive({ session: result.createdSessionId });
-        router.push("/screens/auth/PasswordChangedScreen");
-      } else {
-        Toast.show({
-          type: "error",
-          text1: "Reset incomplete",
-          text2: "Please check your input or try again.",
-        });
-      }
+      // const result = await setPassword({ password });
+      // if (result.status === "complete") {
+      //   await setActive({ session: result.createdSessionId });
+      //   router.push("/screens/auth/PasswordChangedScreen");
+      // } else {
+      //   Toast.show({
+      //     type: "error",
+      //     text1: "Reset incomplete",
+      //     text2: "Please check your input or try again.",
+      //   });
+      // }
     } catch (err: any) {
       Toast.show({
         type: "error",
