@@ -67,6 +67,7 @@
 // }
 
 // app/index.tsx
+import { useAuth } from "@clerk/clerk-expo";
 import {
   DMSans_400Regular,
   DMSans_500Medium,
@@ -81,7 +82,6 @@ import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import { ActivityIndicator, Text, View } from "react-native";
 import SplashScreen from "./screens/SplashScreen";
-import { useAuth } from "@clerk/clerk-expo";
 
 export default function Index() {
   const router = useRouter();
@@ -100,6 +100,9 @@ export default function Index() {
     if (fontsLoaded && isLoaded) {
       const timeout = setTimeout(() => {
         setShowSplash(false);
+        console.log("Fonts loaded:", fontsLoaded);
+        console.log("Auth loaded:", isLoaded);
+        console.log("User signed in:", isSignedIn);
 
         if (isSignedIn) {
           router.replace("/(tabs)");

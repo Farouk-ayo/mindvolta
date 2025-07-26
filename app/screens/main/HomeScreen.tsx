@@ -165,7 +165,7 @@ export const HomeScreen: React.FC = () => {
                 />
               </Pressable>
             </View>
-            <View className="items-center justify-center w-16 h-16 bg-secondary rounded-xl">
+            <View className="items-center justify-center w-16 h-16 rounded-xl">
               <Image
                 source={require("../../../assets/icons/music.png")}
                 className="w-20 h-20"
@@ -207,7 +207,7 @@ export const HomeScreen: React.FC = () => {
 
       {/* Call Button - Floating */}
       <View className="absolute bottom-4 right-4">
-        <Pressable className="w-14 h-14 bg-secondary rounded-full items-center justify-center shadow-lg active:scale-95">
+        <Pressable className="w-14 h-14 rounded-full items-center justify-center shadow-lg active:scale-95">
           <Image
             source={require("../../../assets/icons/call.png")}
             resizeMode="contain"
