@@ -81,7 +81,6 @@ import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import { ActivityIndicator, Text, View } from "react-native";
 import SplashScreen from "./screens/SplashScreen";
-import { useAuth } from "@clerk/clerk-expo";
 
 export default function Index() {
   const router = useRouter();
@@ -93,24 +92,23 @@ export default function Index() {
     Epilogue_700Bold,
   });
 
-  const { isLoaded, isSignedIn } = useAuth();
   const [showSplash, setShowSplash] = useState(true);
 
   useEffect(() => {
-    if (fontsLoaded && isLoaded) {
+    if (fontsLoaded) {
       const timeout = setTimeout(() => {
         setShowSplash(false);
 
-        if (isSignedIn) {
-          router.replace("/(tabs)");
-        } else {
-          router.replace("/screens/auth/LoginScreen");
-        }
+        // if (isSignedIn) {
+        //   router.replace("/(tabs)");
+        // } else {
+        router.replace("/screens/auth/LoginScreen");
+        // }
       }, 2000); // Optional delay to show your splash
 
       return () => clearTimeout(timeout);
     }
-  }, [fontsLoaded, isLoaded, isSignedIn, router]);
+  }, [fontsLoaded, router]);
 
   const AppText = (props: React.ComponentProps<typeof Text>) => (
     <Text
@@ -119,7 +117,7 @@ export default function Index() {
     />
   );
 
-  if (!fontsLoaded || !isLoaded || showSplash) {
+  if (!fontsLoaded || showSplash) {
     return <SplashScreen />;
   }
 

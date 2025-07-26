@@ -1,6 +1,5 @@
 import NavigateBack from "@/components/ui/auth/NavigateBack";
 import VerifyEmailForm from "@/components/ui/auth/VerifyEmailForm";
-import { useSignUp } from "@clerk/clerk-expo";
 import {
   KeyboardAvoidingView,
   Platform,
@@ -10,9 +9,6 @@ import {
 } from "react-native";
 
 export default function VerifyEmailScreen() {
-  const { signUp } = useSignUp();
-  const email = signUp?.emailAddress;
-
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -31,7 +27,7 @@ export default function VerifyEmailScreen() {
         </Text>
         <Text className="text-center text-gray-600 mb-8">
           We’ve sent a 6 digit code to{" "}
-          <Text className="font-semibold text-gray-800">{email}</Text>.
+          <Text className="font-semibold text-gray-800"> email@email.com</Text>.
         </Text>
 
         <VerifyEmailForm />

@@ -1,4 +1,3 @@
-import { useSignIn } from "@clerk/clerk-expo";
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import { Pressable, Text, View } from "react-native";
@@ -8,7 +7,6 @@ import Toast from "react-native-toast-message";
 
 export default function LoginForm() {
   const router = useRouter();
-  const { signIn, isLoaded, setActive } = useSignIn();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState<{ email?: string; password?: string }>(
@@ -23,23 +21,6 @@ export default function LoginForm() {
         password: !password ? "Password is required" : undefined,
       });
       return;
-    }
-
-    if (!isLoaded) return;
-
-    setLoading(true);
-    try {
-      const res = await signIn.create({ identifier: email, password });
-      await setActive({ session: res.createdSessionId });
-      router.replace("/(tabs)");
-    } catch (err: any) {
-      Toast.show({
-        type: "error",
-        text1: "Login failed",
-        text2: err.errors?.[0]?.message || "Something went wrong",
-      });
-    } finally {
-      setLoading(false);
     }
   };
 
