@@ -65,7 +65,7 @@ export default function SignupForm() {
         text2: "We've sent you a verification code.",
       });
 
-      router.push("/screens/auth/VerifyEmail");
+      router.push("/screens/auth/VerifyEmailScreen");
     } catch (err: any) {
       Toast.show({
         type: "error",

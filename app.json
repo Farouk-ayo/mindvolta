@@ -17,7 +17,7 @@
         "backgroundColor": "#FFB810"
       },
       "edgeToEdgeEnabled": true,
-      "package": "com.yourname.yourapp"
+      "package": "com.faroukayo.mindvolta"
     },
     "web": {
       "bundler": "metro",
