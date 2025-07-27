@@ -1,10 +1,9 @@
 import AnimatedFadeSlide from "@/components/AnimatedFadeSlide";
 import NavigateBack from "@/components/ui/auth/NavigateBack";
 import SignupForm from "@/components/ui/auth/SignupForm";
-import SocialButton from "@/components/ui/buttons/SocialButton";
+import SocialLogins from "@/components/ui/auth/SocialLogins";
 import { useRouter } from "expo-router";
 import {
-  Alert,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
@@ -15,10 +14,6 @@ import {
 
 export default function SignupScreen() {
   const router = useRouter();
-
-  const handleSocialSignup = (provider: "google" | "facebook" | "apple") => {
-    Alert.alert("Social Signup", `${provider} signup not implemented yet`);
-  };
 
   return (
     <KeyboardAvoidingView
@@ -43,31 +38,9 @@ export default function SignupScreen() {
           </View>
         </AnimatedFadeSlide>
 
-        <AnimatedFadeSlide delay={200}>
-          <SignupForm />
-        </AnimatedFadeSlide>
+        <SignupForm />
 
-        <AnimatedFadeSlide delay={400}>
-          <View className="px-6 mb-6">
-            <Text className="text-center text-gray-600 mb-4">
-              Or continue with
-            </Text>
-            <View className="flex-row justify-center space-x-4">
-              <SocialButton
-                provider="google"
-                onPress={() => handleSocialSignup("google")}
-              />
-              <SocialButton
-                provider="facebook"
-                onPress={() => handleSocialSignup("facebook")}
-              />
-              <SocialButton
-                provider="apple"
-                onPress={() => handleSocialSignup("apple")}
-              />
-            </View>
-          </View>
-        </AnimatedFadeSlide>
+        <SocialLogins />
         <AnimatedFadeSlide delay={600}>
           <View className="px-6 pb-8">
             <Text className="text-center text-gray-500 text-xs mt-4 leading-4">

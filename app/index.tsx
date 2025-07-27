@@ -67,7 +67,6 @@
 // }
 
 // app/index.tsx
-import { useAuth } from "@clerk/clerk-expo";
 import {
   DMSans_400Regular,
   DMSans_500Medium,
@@ -82,6 +81,7 @@ import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import { ActivityIndicator, Text, View } from "react-native";
 import SplashScreen from "./screens/SplashScreen";
+import { useAuth } from "@clerk/clerk-expo";
 
 export default function Index() {
   const router = useRouter();
@@ -98,20 +98,16 @@ export default function Index() {
 
   useEffect(() => {
     if (fontsLoaded && isLoaded) {
-      const timeout = setTimeout(() => {
-        setShowSplash(false);
-        console.log("Fonts loaded:", fontsLoaded);
-        console.log("Auth loaded:", isLoaded);
-        console.log("User signed in:", isSignedIn);
+      setShowSplash(false);
+      console.log("Fonts loaded:", fontsLoaded);
+      console.log("Auth loaded:", isLoaded);
+      console.log("User signed in:", isSignedIn);
 
-        if (isSignedIn) {
-          router.replace("/(tabs)");
-        } else {
-          router.replace("/screens/auth/LoginScreen");
-        }
-      }, 2000); // Optional delay to show your splash
-
-      return () => clearTimeout(timeout);
+      if (isSignedIn) {
+        router.replace("/(tabs)");
+      } else {
+        router.replace("/screens/auth/LoginScreen");
+      }
     }
   }, [fontsLoaded, isLoaded, isSignedIn, router]);
 
@@ -129,7 +125,7 @@ export default function Index() {
   return (
     <View className="flex-1 justify-center items-center">
       <ActivityIndicator size="large" />
-      <AppText>Checking authentication...</AppText>
+      <AppText className="text-primary">Checking authentication...</AppText>
     </View>
   );
 }
