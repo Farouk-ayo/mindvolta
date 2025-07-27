@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect } from "react";
 import * as WebBrowser from "expo-web-browser";
 import * as AuthSession from "expo-auth-session";
-import { useSSO } from "@clerk/clerk-expo";
+import { useAuth, useSSO } from "@clerk/clerk-expo";
 import { Text, View } from "react-native";
 import Toast from "react-native-toast-message";
 import SocialButton from "@/components/ui/buttons/SocialButton";
@@ -22,6 +22,8 @@ export const useWarmUpBrowser = () => {
 WebBrowser.maybeCompleteAuthSession();
 
 export default function SocialLogins() {
+  const { isSignedIn } = useAuth();
+  console.log(isSignedIn);
   useWarmUpBrowser();
 
   // Use the `useSSO()` hook to access the `startSSOFlow()` method
