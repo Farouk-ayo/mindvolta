@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Animated } from "react-native";
-import { ControlButton } from "./ControlButton";
+import ControlButton from "./ControlButton";
 import {
   Shuffle,
   SkipBack,
@@ -20,7 +20,7 @@ interface MusicControlsProps {
   pulseAnim: Animated.Value;
 }
 
-export const MusicControls: React.FC<MusicControlsProps> = ({
+const MusicControls: React.FC<MusicControlsProps> = ({
   isPlaying,
   onPlayPause,
   onPrevious,
@@ -70,3 +70,5 @@ export const MusicControls: React.FC<MusicControlsProps> = ({
     />
   </View>
 );
+
+export default MusicControls;
