@@ -5,7 +5,7 @@ interface AlbumArtProps {
   source: ImageSourcePropType;
 }
 
-export const AlbumArt: React.FC<AlbumArtProps> = ({ source }) => (
+const AlbumArt: React.FC<AlbumArtProps> = ({ source }) => (
   <View className="items-center mb-12">
     <View className="relative">
       <View className="w-80 h-80 rounded-3xl bg-gradient-to-br from-pink-200 via-purple-200 to-blue-200 shadow-2xl shadow-purple-200/50">
@@ -20,3 +20,5 @@ export const AlbumArt: React.FC<AlbumArtProps> = ({ source }) => (
     </View>
   </View>
 );
+
+export default AlbumArt;

@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/buttons/Button";
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import { TextInput, View } from "react-native";
-import { StepLayout } from "./StepLayout";
+import StepLayout from "./StepLayout";
 
 const NameInputScreen = () => {
   const [name, setName] = useState("Samanda");

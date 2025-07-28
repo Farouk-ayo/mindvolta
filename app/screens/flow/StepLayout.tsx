@@ -13,7 +13,7 @@ interface StepLayoutProps {
   onBack?: () => void;
 }
 
-export const StepLayout: React.FC<StepLayoutProps> = ({
+const StepLayout: React.FC<StepLayoutProps> = ({
   step,
   total,
   title,
@@ -58,3 +58,5 @@ export const StepLayout: React.FC<StepLayoutProps> = ({
     </SafeAreaView>
   );
 };
+
+export default StepLayout;

@@ -1,7 +1,7 @@
 import { View, Text } from "react-native";
 import React from "react";
 
-const community = () => {
+const Community = () => {
   return (
     <View>
       <Text>community</Text>
@@ -9,4 +9,4 @@ const community = () => {
   );
 };
 
-export default community;
+export default Community;

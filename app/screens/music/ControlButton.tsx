@@ -8,7 +8,7 @@ interface ControlButtonProps {
   variant?: "default" | "primary";
 }
 
-export const ControlButton: React.FC<ControlButtonProps> = ({
+const ControlButton: React.FC<ControlButtonProps> = ({
   source,
   onPress,
   size = "medium",
@@ -34,3 +34,5 @@ export const ControlButton: React.FC<ControlButtonProps> = ({
     </Pressable>
   );
 };
+
+export default ControlButton;
