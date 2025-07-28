@@ -1,3 +1,4 @@
+import { useAuth } from "@clerk/clerk-expo";
 import {
   DMSans_400Regular,
   DMSans_500Medium,
@@ -12,7 +13,6 @@ import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import { ActivityIndicator, Text, View } from "react-native";
 import SplashScreen from "./screens/SplashScreen";
-import { useAuth } from "@clerk/clerk-expo";
 
 export default function Index() {
   const router = useRouter();
@@ -37,11 +37,14 @@ export default function Index() {
 
   useEffect(() => {
     if (!showSplash && fontsLoaded && isLoaded) {
-      if (isSignedIn) {
-        router.replace("/(tabs)");
-      } else {
-        router.replace("/screens/auth/LoginScreen");
-      }
+      const timer = setTimeout(() => {
+        if (isSignedIn) {
+          router.replace("/(tabs)");
+        } else {
+          router.replace("/screens/auth/LoginScreen");
+        }
+      }, 100);
+      return () => clearTimeout(timer);
     }
   }, [showSplash, fontsLoaded, isLoaded, isSignedIn, router]);
 
