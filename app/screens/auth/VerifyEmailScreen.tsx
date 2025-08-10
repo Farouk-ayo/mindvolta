@@ -17,7 +17,7 @@ export default function VerifyEmailScreen() {
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
 
       <ScrollView
-        contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
+        contentContainerStyle={{ flexGrow: 1, justifyContent: "flex-start" }}
         keyboardShouldPersistTaps="handled"
       >
         <NavigateBack />
