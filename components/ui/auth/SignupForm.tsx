@@ -1,4 +1,3 @@
-import { useSignUp } from "@clerk/clerk-expo";
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import { View, Text, Pressable } from "react-native";
@@ -8,7 +7,6 @@ import AuthButton from "@/components/ui/buttons/AuthButton";
 
 export default function SignupForm() {
   const router = useRouter();
-  const { signUp, isLoaded } = useSignUp();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -48,33 +46,7 @@ export default function SignupForm() {
   };
 
   const handleSignup = async () => {
-    if (!validateForm() || !isLoaded) return;
-
-    setLoading(true);
-    try {
-      await signUp.create({
-        emailAddress: email,
-        password,
-      });
-
-      await signUp.prepareEmailAddressVerification({ strategy: "email_code" });
-
-      Toast.show({
-        type: "success",
-        text1: "Check your email",
-        text2: "We've sent you a verification code.",
-      });
-
-      router.push("/screens/auth/VerifyEmailScreen");
-    } catch (err: any) {
-      Toast.show({
-        type: "error",
-        text1: "Signup failed",
-        text2: err.errors?.[0]?.message || "Something went wrong",
-      });
-    } finally {
-      setLoading(false);
-    }
+    if (!validateForm()) return
   };
 
   const isFormFilled = email && password && confirmPassword;

@@ -24,29 +24,23 @@ export default function Index() {
     Epilogue_700Bold,
   });
 
-  const { isLoaded, isSignedIn } = useAuth();
   const [showSplash, setShowSplash] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowSplash(false);
-    }, 2000);
+    if (fontsLoaded) {
+      const timeout = setTimeout(() => {
+        setShowSplash(false);
 
-    return () => clearTimeout(timer);
-  }, []);
+        // if (isSignedIn) {
+        //   router.replace("/(tabs)");
+        // } else {
+        router.replace("/screens/auth/LoginScreen");
+        // }
+      }, 2000); // Optional delay to show your splash
 
-  useEffect(() => {
-    if (!showSplash && fontsLoaded && isLoaded) {
-      const timer = setTimeout(() => {
-        if (isSignedIn) {
-          router.replace("/(tabs)");
-        } else {
-          router.replace("/screens/auth/LoginScreen");
-        }
-      }, 100);
-      return () => clearTimeout(timer);
+      return () => clearTimeout(timeout);
     }
-  }, [showSplash, fontsLoaded, isLoaded, isSignedIn, router]);
+  }, [fontsLoaded, router])
 
   const AppText = (props: React.ComponentProps<typeof Text>) => (
     <Text
@@ -55,7 +49,8 @@ export default function Index() {
     />
   );
 
-  if (showSplash) {
+  if (!fontsLoaded || showSplash) {
+
     return <SplashScreen />;
   }
 

@@ -1,4 +1,3 @@
-import { useSignUp } from "@clerk/clerk-expo";
 import { useRouter } from "expo-router";
 import { useRef, useState } from "react";
 import {
@@ -11,7 +10,6 @@ import {
 import Toast from "react-native-toast-message";
 
 export default function VerifyEmailForm() {
-  const { signUp, setActive, isLoaded } = useSignUp();
   const router = useRouter();
 
   const [code, setCode] = useState(Array(6).fill(""));
@@ -34,34 +32,12 @@ export default function VerifyEmailForm() {
   const isCodeFilled = code.every((c) => c !== "");
 
   const handleVerify = async () => {
-    if (!isCodeFilled || !isLoaded) return;
+    if (!isCodeFilled) return;
     setLoading("verifying");
-
-    try {
-      const res = await signUp.attemptEmailAddressVerification({
-        code: code.join(""),
-      });
-
-      await setActive({ session: res.createdSessionId });
-      setLoading("redirecting");
-
-      setTimeout(() => {
-        router.replace("/(tabs)");
-      }, 1200);
-    } catch (err: any) {
-      Toast.show({
-        type: "error",
-        text1: "Invalid code",
-        text2: err.errors?.[0]?.message || "Try again.",
-      });
-      setLoading("idle");
-    }
   };
 
   const handleResend = async () => {
-    if (!isLoaded) return;
     try {
-      await signUp.prepareEmailAddressVerification({ strategy: "email_code" });
       Toast.show({ type: "success", text1: "OTP resent" });
     } catch {
       Toast.show({ type: "error", text1: "Failed to resend OTP" });
