@@ -3,7 +3,7 @@ import { CheckboxOption } from "@/components/ui/CheckboxOption";
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import { ScrollView, View } from "react-native";
-import { StepLayout } from "./StepLayout";
+import StepLayout from "./StepLayout";
 
 const options = [
   "Work/School",

@@ -1,20 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { SafeAreaView, StatusBar, View, Animated } from "react-native";
 import { useRouter } from "expo-router";
-import { MusicPlayerHeader } from "./MusicHeader";
-import { AlbumArt } from "./AlbumArt";
-import { ProgressBar } from "./ProgressBar";
-import { MusicControls } from "./MusicControls";
-import { SongInfo } from "./SongInfo";
+import MusicPlayerHeader from "./MusicHeader";
+import AlbumArt from "./AlbumArt";
+import ProgressBar from "./ProgressBar";
+import MusicControls from "./MusicControls";
+import SongInfo from "./SongInfo";
 
-export const MusicPlayerScreen: React.FC = () => {
+const MusicPlayerScreen: React.FC = () => {
   const router = useRouter();
   const [isPlaying, setIsPlaying] = useState(true);
   const [currentTime, setCurrentTime] = useState(142);
   const [duration] = useState(267);
 
-  const pulseAnim = new Animated.Value(1);
-  const progressAnim = new Animated.Value(currentTime / duration);
+  const pulseAnim = useMemo(() => new Animated.Value(1), []);
+  const progressAnim = useMemo(
+    () => new Animated.Value(currentTime / duration),
+    []
+  );
 
   useEffect(() => {
     const pulse = () => {

@@ -8,6 +8,10 @@ export default function SocialLogins() {
     return;
   };
 
+  if (isSignedIn) {
+    return null;
+  }
+
   return (
     <View className="px-6">
       <Text className="text-center text-gray-600 mb-6">Or continue with</Text>
@@ -15,14 +19,17 @@ export default function SocialLogins() {
         <SocialButton
           provider="google"
           onPress={() => handleSocialLogin("google")}
+          disabled={isLoading}
         />
         <SocialButton
           provider="facebook"
           onPress={() => handleSocialLogin("facebook")}
+          disabled={isLoading}
         />
         <SocialButton
           provider="apple"
           onPress={() => handleSocialLogin("apple")}
+          disabled={isLoading}
         />
       </View>
     </View>

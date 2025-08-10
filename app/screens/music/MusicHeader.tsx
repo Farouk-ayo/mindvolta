@@ -8,7 +8,7 @@ interface MusicPlayerHeaderProps {
   onBack: () => void;
 }
 
-export const MusicPlayerHeader: React.FC<MusicPlayerHeaderProps> = ({
+const MusicPlayerHeader: React.FC<MusicPlayerHeaderProps> = ({
   title,
   onBack,
 }) => {
@@ -29,3 +29,5 @@ export const MusicPlayerHeader: React.FC<MusicPlayerHeaderProps> = ({
     </View>
   );
 };
+
+export default MusicPlayerHeader;

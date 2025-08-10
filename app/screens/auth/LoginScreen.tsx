@@ -1,5 +1,4 @@
 import { useRouter } from "expo-router";
-import { ChevronLeft } from "lucide-react-native";
 import {
   Pressable,
   SafeAreaView,

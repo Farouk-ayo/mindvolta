@@ -46,7 +46,7 @@ export default function SignupForm() {
   };
 
   const handleSignup = async () => {
-    if (!validateForm()) return;
+    if (!validateForm()) return
   };
 
   const isFormFilled = email && password && confirmPassword;

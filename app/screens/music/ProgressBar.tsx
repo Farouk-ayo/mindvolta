@@ -9,7 +9,7 @@ interface ProgressBarProps {
   progressAnim: Animated.Value;
 }
 
-export const ProgressBar: React.FC<ProgressBarProps> = ({
+const ProgressBar: React.FC<ProgressBarProps> = ({
   currentTime,
   duration,
   progressAnim,
@@ -45,3 +45,5 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
     </View>
   );
 };
+
+export default ProgressBar;
