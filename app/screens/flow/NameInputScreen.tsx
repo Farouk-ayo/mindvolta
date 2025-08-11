@@ -1,17 +1,31 @@
 import { Button } from "@/components/ui/buttons/Button";
-import { useRouter } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import React, { useState } from "react";
-import { TextInput, View } from "react-native";
+import { Alert, TextInput, View } from "react-native";
 import StepLayout from "./StepLayout";
+import { useAuth } from "@/lib/hooks/useAuth";
+import { handleErrorGlobal } from "@/lib/utils";
 
 const NameInputScreen = () => {
-  const [name, setName] = useState("Samanda");
+  const params = useLocalSearchParams();
+  const email = Array.isArray(params.email)
+    ? params.email[0]
+    : (params.email ?? "");
+  const password = Array.isArray(params.password)
+    ? params.password[0]
+    : (params.password ?? "");
+  const [name, setName] = useState("");
+  const { register, isLoading } = useAuth();
   const router = useRouter();
 
-  const handleContinue = () => {
-    router.push("/screens/flow/MentalHealthSurveyScreen");
+  const handleContinue = async () => {
+    try {
+      await register({ email, password, name });
+      router.push("/screens/flow/MentalHealthSurveyScreen");
+    } catch (error: any) {
+      handleErrorGlobal(error);
+    }
   };
-
   return (
     <StepLayout
       step={1}
@@ -34,7 +48,7 @@ const NameInputScreen = () => {
           className="mt-8 w-full"
           variant="secondary"
           size="lg"
-          disabled={name.trim().length === 0}
+          disabled={name.trim().length === 0 || isLoading}
         />
       </View>
     </StepLayout>

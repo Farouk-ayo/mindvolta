@@ -1,18 +1,19 @@
+import Input from "@/components/ui/Input";
+import AuthButton from "@/components/ui/buttons/AuthButton";
+import { useAuth } from "@/lib/hooks/useAuth";
+import { handleErrorGlobal } from "@/lib/utils";
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import { Pressable, Text, View } from "react-native";
-import Input from "@/components/ui/Input";
-import AuthButton from "@/components/ui/buttons/AuthButton";
-import Toast from "react-native-toast-message";
 
 export default function LoginForm() {
   const router = useRouter();
   const [email, setEmail] = useState("");
+  const { login, isLoading } = useAuth();
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState<{ email?: string; password?: string }>(
     {}
   );
-  const [loading, setLoading] = useState(false);
 
   const handleLogin = async () => {
     if (!email || !password) {
@@ -21,6 +22,13 @@ export default function LoginForm() {
         password: !password ? "Password is required" : undefined,
       });
       return;
+    }
+
+    try {
+      await login({ email, password });
+      router.replace("/(tabs)");
+    } catch (error: any) {
+      handleErrorGlobal(error);
     }
   };
 
@@ -60,7 +68,7 @@ export default function LoginForm() {
       <AuthButton
         title="Login"
         onPress={handleLogin}
-        loading={loading}
+        loading={isLoading}
         variant={email && password ? "primary" : "secondary"}
         className="mb-8"
       />

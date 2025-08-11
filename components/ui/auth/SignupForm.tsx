@@ -1,9 +1,8 @@
-import { useRouter } from "expo-router";
-import { useState } from "react";
-import { View, Text, Pressable } from "react-native";
-import Toast from "react-native-toast-message";
 import Input from "@/components/ui/Input";
 import AuthButton from "@/components/ui/buttons/AuthButton";
+import { useRouter } from "expo-router";
+import { useState } from "react";
+import { Pressable, Text, View } from "react-native";
 
 export default function SignupForm() {
   const router = useRouter();
@@ -15,12 +14,10 @@ export default function SignupForm() {
     email?: string;
     password?: string;
     confirmPassword?: string;
+    fullName?: string;
   }>({});
-  const [loading, setLoading] = useState(false);
-
   const validateForm = () => {
     const newErrors: typeof errors = {};
-
     if (!email.trim()) {
       newErrors.email = "Email is required";
     } else if (!/\S+@\S+\.\S+/.test(email)) {
@@ -45,8 +42,12 @@ export default function SignupForm() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSignup = async () => {
-    if (!validateForm()) return
+  const handleSignup = () => {
+    if (!validateForm()) return;
+    router.push({
+      pathname: "/screens/flow/NameInputScreen",
+      params: { email, password },
+    });
   };
 
   const isFormFilled = email && password && confirmPassword;
@@ -93,7 +94,6 @@ export default function SignupForm() {
       <AuthButton
         title="Create Account"
         onPress={handleSignup}
-        loading={loading}
         variant={isFormFilled ? "primary" : "secondary"}
         className="my-6"
       />

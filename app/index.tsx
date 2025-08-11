@@ -1,4 +1,3 @@
-import { useAuth } from "@clerk/clerk-expo";
 import {
   DMSans_400Regular,
   DMSans_500Medium,
@@ -13,6 +12,7 @@ import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import { ActivityIndicator, Text, View } from "react-native";
 import SplashScreen from "./screens/SplashScreen";
+import { useAuth } from "@/lib/hooks/useAuth";
 
 export default function Index() {
   const router = useRouter();
@@ -23,6 +23,7 @@ export default function Index() {
     Epilogue_400Regular,
     Epilogue_700Bold,
   });
+  const { isAuthenticated } = useAuth();
 
   const [showSplash, setShowSplash] = useState(true);
 
@@ -31,16 +32,16 @@ export default function Index() {
       const timeout = setTimeout(() => {
         setShowSplash(false);
 
-        // if (isSignedIn) {
-        //   router.replace("/(tabs)");
-        // } else {
-        router.replace("/screens/auth/LoginScreen");
-        // }
+        if (isAuthenticated) {
+          router.replace("/(tabs)");
+        } else {
+          router.replace("/screens/auth/LoginScreen");
+        }
       }, 2000); // Optional delay to show your splash
 
       return () => clearTimeout(timeout);
     }
-  }, [fontsLoaded, router])
+  }, [fontsLoaded, router, isAuthenticated]);
 
   const AppText = (props: React.ComponentProps<typeof Text>) => (
     <Text
@@ -50,11 +51,10 @@ export default function Index() {
   );
 
   if (!fontsLoaded || showSplash) {
-
     return <SplashScreen />;
   }
 
-  if (!fontsLoaded || !isLoaded) {
+  if (!fontsLoaded) {
     return (
       <View className="flex-1 justify-center items-center bg-white">
         <ActivityIndicator size="large" className="text-primary" />

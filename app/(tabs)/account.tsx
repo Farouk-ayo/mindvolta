@@ -1,14 +1,16 @@
-import { View, Text, TouchableOpacity } from "react-native";
+import { useAuth } from "@/lib/hooks/useAuth";
+import { useRouter } from "expo-router";
 import React from "react";
-import { useAuth } from "@clerk/clerk-expo";
+import { Text, TouchableOpacity, View } from "react-native";
 
 const Account = () => {
-  const { userId, isSignedIn, signOut } = useAuth();
+  const { user, logout, isAuthenticated } = useAuth();
+  const router = useRouter();
 
   const handleLogout = async () => {
     try {
-      await signOut();
-      console.log("Logged out successfully");
+      await logout();
+      router.replace("/screens/auth/LoginScreen");
     } catch (error) {
       console.error("Logout error:", error);
     }
@@ -17,10 +19,21 @@ const Account = () => {
   return (
     <View className="flex-1 justify-center items-center p-6">
       <Text className="text-lg font-semibold mb-4">
-        {isSignedIn ? `Signed in as: ${userId}` : "Not signed in"}
+        {isAuthenticated ? `Hello, ${user?.name}` : "Not signed in"}
       </Text>
 
-      {isSignedIn && (
+      {/* might remove this   */}
+      {user && (
+        <View className="mb-6">
+          <Text className="text-gray-600 mb-2">Email: {user.email}</Text>
+          <Text className="text-gray-600 mb-2">
+            Onboarding: {user.isOnboardingComplete ? "Complete" : "Incomplete"}
+          </Text>
+        </View>
+      )}
+      {/* end  */}
+
+      {isAuthenticated && (
         <TouchableOpacity onPress={handleLogout}>
           <Text className="text-red-500 underline text-base">Logout</Text>
         </TouchableOpacity>

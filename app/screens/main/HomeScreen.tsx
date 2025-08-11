@@ -1,8 +1,12 @@
 import { MoodButton } from "@/components/ui/buttons/MoodButton";
 import { moodImages } from "@/constants/icons";
+import { getThoughtOfTheDay } from "@/lib/api/queries";
+import { useAuth } from "@/lib/hooks/useAuth";
+import { ThoughtOfTheDay } from "@/lib/types";
 import { useRouter } from "expo-router";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
+  Alert,
   Image,
   Pressable,
   SafeAreaView,
@@ -36,22 +40,83 @@ const moods = [
 
 export const HomeScreen: React.FC = () => {
   const router = useRouter();
+  const { user } = useAuth();
+  const [thoughtOfTheDay, setThoughtOfTheDay] =
+    useState<ThoughtOfTheDay | null>(null);
+
+  useEffect(() => {
+    loadThoughtOfTheDay();
+  }, []);
+
+  const loadThoughtOfTheDay = async () => {
+    try {
+      const thought = await getThoughtOfTheDay();
+      setThoughtOfTheDay(thought);
+    } catch (error) {
+      console.error("Failed to load thought of the day:", error);
+    }
+  };
+
   const handleMoodPress = (mood: string) => {
     console.log("Selected mood:", mood);
     alert(`You're feeling ${mood} today`);
   };
 
+  // const handleMoodPress = async (mood: string, moodType: MoodType) => {
+  //   try {
+  //     // Show intensity selector
+  //     Alert.prompt(
+  //       `You're feeling ${mood}`,
+  //       "Rate your mood intensity (1-10):",
+  //       [
+  //         { text: "Cancel", style: "cancel" },
+  //         {
+  //           text: "Log Mood",
+  //           onPress: async (intensity) => {
+  //             const intensityNum = parseInt(intensity || "5");
+  //             if (intensityNum >= 1 && intensityNum <= 10) {
+  //               await moodService.logMood({
+  //                 mood: moodType,
+  //                 intensity: intensityNum,
+  //                 activities: [], // Could be expanded later
+  //                 triggers: [],
+  //               });
+  //               Alert.alert("Success", `Mood logged: ${mood} (${intensityNum}/10)`);
+  //             }
+  //           },
+  //         },
+  //       ],
+  //       "plain-text",
+  //       "5"
+  //     );
+  //   } catch (error: any) {
+  // handleErrorGlobal(error);
+  //   }
+  // };
+
   const handleMindvoltraPress = () => {
-    alert("Opening Mindvoltra AI...");
+    Alert.alert("Opening Mindvoltra AI...");
     router.push("/screens/chat/ChatScreen");
   };
 
   const handleListenNow = () => {
     router.push("/screens/music/MusicPlayerScreen");
-    alert("Starting calming music...");
+    Alert.alert("Starting calming music...");
   };
   const handleClickHere = () => {
     router.push("/screens/flow/NameInputScreen");
+
+    //  if (user?.isOnboardingComplete) {
+    //   router.push("/(tabs)/insights");
+    // } else {
+    //   router.push("/screens/flow/NameInputScreen");
+    // }
+  };
+
+  const handleThoughtReadMore = () => {
+    if (thoughtOfTheDay) {
+      Alert.alert(thoughtOfTheDay.title, thoughtOfTheDay.content);
+    }
   };
 
   return (
@@ -60,11 +125,15 @@ export const HomeScreen: React.FC = () => {
         <View className="flex-row items-center justify-between mb-6">
           <View className="flex-row items-center">
             <View className="w-10 h-10 bg-orange-200 rounded-full mr-3 items-center justify-center">
-              <Text className="text-orange-600 font-bold">S</Text>
+              <Text className="text-orange-600 font-bold">
+                {user?.name?.charAt(0)?.toUpperCase() || "U"}
+              </Text>
             </View>
             <View>
               <Text className="text-gray-500 text-sm">Hello,</Text>
-              <Text className="text-xl font-bold text-gray-900">Samanda</Text>
+              <Text className="text-xl font-bold text-gray-900">
+                {user?.name || "User"}
+              </Text>
             </View>
           </View>
           <Pressable className="p-2 bg-gray-100 rounded-full">
@@ -180,6 +249,30 @@ export const HomeScreen: React.FC = () => {
           <Text className="text-lg font-semibold text-gray-900 mb-4">
             Thought of the day
           </Text>
+
+          {/* <View className="bg-primary/10 rounded-2xl p-4 flex-row items-center">
+            <View className="flex-1 mr-4">
+              <Text className="text-base font-bold font-alegreya text-gray-900 mb-2">
+                {thoughtOfTheDay?.title || "Loading..."}
+              </Text>
+              <Text className="text-gray-600 text-sm leading-5 flex-1 mr-4">
+                {thoughtOfTheDay ? (
+                  <>
+                    {thoughtOfTheDay.content.substring(0, 80)}...&nbsp;
+                    <Text
+                      className="text-primary font-medium"
+                      onPress={handleThoughtReadMore}
+                    >
+                      read more
+                    </Text>
+                  </>
+                ) : (
+                  "Loading thought of the day..."
+                )}
+              </Text>
+            </View>{" "}
+          </View> */}
+
           <View className="bg-primary/10 rounded-2xl p-4 flex-row items-centerm">
             <View className="flex-1 mr-4">
               <Text className="text-base font-bold font-alegreya text-gray-900 mb-2">
@@ -207,7 +300,15 @@ export const HomeScreen: React.FC = () => {
 
       {/* Call Button - Floating */}
       <View className="absolute bottom-4 right-4">
-        <Pressable className="w-14 h-14 rounded-full items-center justify-center shadow-lg active:scale-95">
+        <Pressable
+          onPress={() =>
+            Alert.alert(
+              "Emergency Contact",
+              "Would you like to call emergency services or a crisis helpline?"
+            )
+          }
+          className="w-14 h-14 rounded-full items-center justify-center shadow-lg active:scale-95"
+        >
           <Image
             source={require("../../../assets/icons/call.png")}
             resizeMode="contain"
