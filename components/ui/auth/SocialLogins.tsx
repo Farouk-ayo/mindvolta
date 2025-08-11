@@ -1,5 +1,5 @@
-import { Text, View } from "react-native";
 import SocialButton from "@/components/ui/buttons/SocialButton";
+import { Text, View } from "react-native";
 
 export default function SocialLogins() {
   const handleSocialLogin = async (
@@ -15,14 +15,17 @@ export default function SocialLogins() {
         <SocialButton
           provider="google"
           onPress={() => handleSocialLogin("google")}
+          disabled={false}
         />
         <SocialButton
           provider="facebook"
           onPress={() => handleSocialLogin("facebook")}
+          disabled={false}
         />
         <SocialButton
           provider="apple"
           onPress={() => handleSocialLogin("apple")}
+          disabled={false}
         />
       </View>
     </View>

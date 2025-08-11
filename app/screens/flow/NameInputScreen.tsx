@@ -23,7 +23,6 @@ const NameInputScreen = () => {
       await register({ email, password, name });
       router.push("/screens/flow/MentalHealthSurveyScreen");
     } catch (error: any) {
-
       handleErrorGlobal(error);
     }
   };
