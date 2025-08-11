@@ -3,12 +3,12 @@ import axios from "axios";
 
 // Base URL
 const API_BASE_URL = __DEV__
-  ? "http://localhost:5000/api"
-  : "https://your-production-url.railway.app/api";
+  ? "http://10.0.2.2:5000/api"
+  : "https://mindvolta-be.onrender.com/api";
 
 export const WS_URL = __DEV__
-  ? "ws://localhost:5000"
-  : "wss://your-production-url.railway.app";
+  ? "ws://10.0.2.2:5000"
+  : "wss://mindvolta-be.onrender.com";
 
 export interface ApiResponse<T = any> {
   success: boolean;
@@ -25,35 +25,15 @@ const axiosInstance = axios.create({
     "Content-Type": "application/json",
   },
 });
-
-// Add token before every request
+console.log("Axios instance created with base URL:", API_BASE_URL);
 axiosInstance.interceptors.request.use(
   (config) => {
-    AsyncStorage.getItem("authToken").then((token) => {
-      if (!config.headers) {
-        config.headers = {};
-      }
-      if (token) {
-        config.headers["Authorization"] = `Bearer ${token}`;
-      } else {
-        delete config.headers["Authorization"];
-      }
-    });
-
+    // AsyncStorage is asynchronous, so we cannot use it here directly.
+    // Instead, set the token using setAuthToken() before making requests.
     return config;
   },
   (error) => Promise.reject(error)
 );
-
-// Helper to set token manually before making requests
-export const setAuthToken = async () => {
-  const token = await AsyncStorage.getItem("authToken");
-  if (token) {
-    axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-  } else {
-    delete axiosInstance.defaults.headers.common["Authorization"];
-  }
-};
 
 // Standardized API methods
 export const api = {

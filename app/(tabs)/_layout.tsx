@@ -1,6 +1,8 @@
 import { tabIcons } from "@/constants/icons";
-import { Tabs } from "expo-router";
-import { Image, Text, View } from "react-native";
+import { useAuth } from "@/lib/hooks/useAuth";
+import { Tabs, useRouter } from "expo-router";
+import { useEffect } from "react";
+import { ActivityIndicator, Image, Text, View } from "react-native";
 
 function TabIcon({ focused, icon, activeIcon, title }: any) {
   return (
@@ -23,6 +25,29 @@ function TabIcon({ focused, icon, activeIcon, title }: any) {
 }
 
 export default function TabsLayout() {
+  const router = useRouter();
+  const { isLoading, isAuthenticated } = useAuth();
+
+  useEffect(() => {
+    if (!isLoading && !isAuthenticated) {
+      router.replace("/screens/auth/LoginScreen");
+    }
+  }, [isLoading, isAuthenticated, router]);
+
+  if (isLoading) {
+    return (
+      <View className="flex-1 justify-center items-center bg-white">
+        <ActivityIndicator size="large" className="text-primary" />
+      </View>
+    );
+  }
+
+  // console.log("isAuthenticated:", isAuthenticated);
+
+  // if (!isAuthenticated) {
+  //   return null;
+  // }
+
   return (
     <Tabs
       screenOptions={{

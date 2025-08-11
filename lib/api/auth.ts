@@ -1,5 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { api, ApiResponse } from "../../services/axiosInstance";
+import axiosInstance, { api, ApiResponse } from "../../services/axiosInstance";
 import { AuthData, LoginCredentials, RegisterData, User } from "../types";
 
 export const login = async (
@@ -46,6 +46,15 @@ const logout = async (): Promise<void> => {
 
 const getStoredToken = async (): Promise<string | null> => {
   return await AsyncStorage.getItem("authToken");
+};
+
+export const setAuthToken = async () => {
+  const token = await AsyncStorage.getItem("authToken");
+  if (token) {
+    axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  } else {
+    delete axiosInstance.defaults.headers.common["Authorization"];
+  }
 };
 
 const getStoredUser = async (): Promise<User | null> => {

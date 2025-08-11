@@ -1,12 +1,8 @@
-import { View, Text } from "react-native";
 import React from "react";
+import InsightsScreen from "../screens/main/InsightsScreen";
 
-const insights = () => {
-  return (
-    <View>
-      <Text>insights</Text>
-    </View>
-  );
+const Insights = () => {
+  return <InsightsScreen />;
 };
 
-export default insights;
+export default Insights;

@@ -6,7 +6,7 @@ import {
   ReactNode,
 } from "react";
 import { LoginCredentials, RegisterData, User } from "../types";
-import { authService } from "../api/auth";
+import { authService, setAuthToken } from "../api/auth";
 
 interface AuthContextType {
   user: User | null;
@@ -47,6 +47,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setIsLoading(true);
     try {
       const authData = await authService.login(credentials);
+      await setAuthToken();
       setUser(authData.user);
     } catch (error) {
       throw error;
@@ -59,6 +60,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setIsLoading(true);
     try {
       const authData = await authService.register(data);
+      await setAuthToken();
       setUser(authData.user);
     } catch (error) {
       throw error;

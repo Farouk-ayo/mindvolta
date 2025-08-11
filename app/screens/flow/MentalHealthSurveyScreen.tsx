@@ -1,21 +1,25 @@
 import { Button } from "@/components/ui/buttons/Button";
 import { CheckboxOption } from "@/components/ui/CheckboxOption";
+import { completeOnboarding } from "@/lib/api/mutation";
+import { useAuth } from "@/lib/hooks/useAuth";
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
-import { ScrollView, View } from "react-native";
-import { StepLayout } from "./StepLayout";
+import { Alert, ScrollView, View } from "react-native";
+import StepLayout from "./StepLayout";
+import { handleErrorGlobal } from "@/lib/utils";
 
 const options = [
   "Work/School",
   "Finances",
   "Relationships",
-  "Health Concerns",
   "Life Changes",
   "Health Concerns",
 ];
 
 const MentalHealthSurveyScreen = () => {
   const [selected, setSelected] = useState<string[]>(["Work/School"]);
+  const [isLoading, setIsLoading] = useState(false);
+  const { user, refreshUser } = useAuth();
   const router = useRouter();
 
   const toggle = (option: string) => {
@@ -26,14 +30,28 @@ const MentalHealthSurveyScreen = () => {
     );
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (selected.length === 0) {
-      alert("Please select at least one option.");
+      Alert.alert("Selection Required", "Please select at least one option.");
       return;
     }
-    router.push("/screens/flow/CompletionScreen");
-  };
+    setIsLoading(true);
 
+    try {
+      await completeOnboarding({
+        name: user?.name || "User",
+        mentalHealthIssues: [], // This could be from a previous screen
+        stressCauses: selected,
+      });
+
+      await refreshUser(); // Refresh user data
+      router.push("/screens/flow/CompletionScreen");
+    } catch (error: any) {
+      handleErrorGlobal(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
   return (
     <StepLayout
       step={5}
@@ -60,6 +78,7 @@ const MentalHealthSurveyScreen = () => {
           variant="secondary"
           onPress={handleSubmit}
           size="lg"
+          loading={isLoading}
           disabled={selected.length === 0}
         />
       </View>
